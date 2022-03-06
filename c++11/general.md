@@ -2,7 +2,7 @@
 
 [原始字面量](#id1)<br/>
 [C++11 标准的类成员初始化](#id2)<br/>
-[final 和 overr#ide](#id3)<br/>
+[final 和 override](#id3)<br/>
 [模板的优化](#id4)<br/>
 [自动类型推导](#id5)<br/>
 [Lambda表达式](#id6)<br/>
