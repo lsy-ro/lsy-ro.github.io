@@ -32,6 +32,7 @@ s1：错误，不能使用小括号 () 初始化对象，应该使用 花括号 
 
 初始化列表总是看起来后作用于构造函数内部的非静态成员初始化。也就是说，通过初始化列表指定的值会覆盖就地初始化时指定的值
 
+
 ## final 和 override
 C++ 中增加了 final 关键字来限制某个类不能被继承，或者某个虚函数不能被重写，和 Jave 的 final 关键字的功能是类似的。如果使用 final 修饰函数，只能修饰虚函数，并且要把final关键字放到类或者函数的后面。
 
@@ -449,27 +450,84 @@ f(1314);
 ```
 
 
+## 基于范围的for循环
+
+C++11 基于范围的 for 循环，语法格式：
+```c
+for (declaration : expression)
+{
+    // 循环体
+}
+
+```
+
+在上面的语法格式中 declaration 表示遍历声明，在遍历过程中，当前被遍历到的元素会被存储到声明的变量中。expression 是要遍历的对象，它可以是表达式、容器、数组、初始化列表等
 
 
+使用基于范围的 for 循环遍历容器，示例代码如下：
 
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
 
+int main(void)
+{
+    vector<int> t{ 1,2,3,4,5,6 };
+    for (auto value : t)
+    {
+        cout << value << " ";
+    }
+    cout << endl;
 
+    return 0;
+}
+```
 
+在上面的例子中，是将容器中遍历的当前元素拷贝到了声明的变量 value 中，因此无法对容器中的元素进行写操作，如果需要在遍历过程中修改元素的值，需要使用引用。
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
 
+int main(void)
+{
+    vector<int> t{ 1,2,3,4,5,6 };
+    cout << "遍历修改之前的容器: ";
+    for (auto &value : t)
+    {
+        cout << value++ << " ";
+    }
+    cout << endl << "遍历修改之后的容器: ";
 
+    for (auto &value : t)
+    {
+        cout << value << " ";
+    }
+    cout << endl;
 
+    return 0;
+}
+```
 
+对容器的遍历过程中，如果只是读数据，不允许修改元素的值，可以使用 const 定义保存元素数据的变量，在定义的时候建议使用 const auto &，这样相对于 const auto 效率要更高一些。
 
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
 
+int main(void)
+{
+    vector<int> t{ 1,2,3,4,5,6 };
+    for (const auto& value : t)
+    {
+        cout << value << " ";
+    }
 
-
-
-
-
-
-
-
-
+    return 0;
+}
+```
 
 
 
